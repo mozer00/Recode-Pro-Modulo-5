@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Viagem</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/cadastro/index.css}">
+</head>
+
+<body>
+	<!-- Navbar -->
+	<div th:replace="fragments/navbar"></div>
+
+
+	<section class="container">
+		<h1 class='text-center'>VIAGEM</h1>
+		<div class="p-4">
+			<a th:href="@{'/viagem/cadastrar'}" class="btn btn-primary mb-2 botao1"> Nova Viagem </a>
+			<table class="table table-responsive table-hover">
+				<thead class="table-dark">
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Valor da Diaria</th>
+						<th scope="col">Data Ida</th>
+						<th scope="col">Data Volta</th>
+						<th scope="col">Cliente</th>
+						<th scope="col">Destino</th>
+						<th scope="col">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="v : ${viagem}">
+						<td th:text="${v.id}"></td>
+						<td><span th:text="${v.valorDiaria}"></span></td>
+						<td th:text="${v.dataIda}"></td>
+						<td th:text="${v.dataVolta}"></td>
+						<td th:text="${v.cliente.nome}"></td>
+						<td th:text="${v.destino.cidade}"></td>
+						<td>
+							<a th:href="@{/viagem/{id}/editar(id=${v.id})}" class="btn btn-success">Editar</a>
+							<a th:href="@{/viagem/{id}/excluir(id=${v.id})}" class="btn btn-danger"
+								th:onclick="return confirm('Deseja excluir?')">Excluir</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+
+	<br>
+	<div th:replace="fragments/footer :: footer"></div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
